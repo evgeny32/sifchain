@@ -1,0 +1,14 @@
+[Unit]
+Description=Sifchain Node
+After=network.target syslog.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+Environment="HOME=/root"
+ExecStart=/root/.sifnoded/cosmovisor/genesis/bin/sifnoded start
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+[Install]
+WantedBy=multi-user.target
